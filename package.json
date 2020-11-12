@@ -1,0 +1,28 @@
+{
+  "name": "Travel-Pal",
+  "version": "1.0.0",
+  "description": "Search for any country you'd like to travel to and learn some facts about that country.",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "unirest": "^0.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sandravaphilips/Travel-Pal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sandravaphilips/Travel-Pal/issues"
+  },
+  "homepage": "https://github.com/Sandravaphilips/Travel-Pal#readme"
+}
