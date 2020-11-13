@@ -1,5 +1,4 @@
-import React from 'react';
-//import { Box, Heading } from '@chakra-ui/core';
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const ResultTab = (props) => {
     const { name, population, capital, demonym, languages, region, currencies } = props;
@@ -8,27 +7,28 @@ const ResultTab = (props) => {
     const currencyNames = new Intl.DisplayNames(['en'], {type: 'currency'});
 
     return(
-        <div>
-            <h3>{name}</h3>
-            <p>Capital: {capital}</p>
-            <p>Region: {region}</p>
-            <p>Population: {population}</p>
-            <p>Demonym: {demonym}</p>
-            <p>Languages:{' '}
-                {
-                    languages.map((language, indx) =>
-                        <span key={indx}>{languageNames.of(language)}</span>
-                    )
-                }
-            </p>
-            <p>Currencies:{' '} 
-                {
-                    currencies.map((currency, indx) =>
-                        <span key={indx}>{currencyNames.of(currency)}</span>
-                    )
-                }
-            </p>
-        </div>
+        <Card>
+            <CardContent>
+                <Typography color='primary' variant="h4" component="h2">{name}</Typography>
+                <Typography><span className='fields'>Capital:</span> {capital}<br/>
+                <span className='fields'>Region:</span> {region}<br/>
+                <span className='fields'>Population:</span> {population}<br/>
+                <span className='fields'>Demonym:</span> {demonym}<br/>
+                <span className='fields'>Language:</span>{' '}
+                    {
+                        languages.map((language, indx) =>
+                            <span key={indx}>{languageNames.of(language)}</span>
+                        )
+                    }<br/>
+                    <span className='fields'>Currency:</span>{' '} 
+                    {
+                        currencies.map((currency, indx) =>
+                            <span key={indx}>{currencyNames.of(currency)}</span>
+                        )
+                    }
+                </Typography>                
+            </CardContent>
+        </Card>
     )
 };
 

@@ -1,8 +1,8 @@
-//import { ThemeProvider, CSSReset, Heading } from "@chakra-ui/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import './App.css';
 import SearchTab from "./components/SearchTab";
 import ResultsTab from "./components/ResultsTab";
+import { Typography } from "@material-ui/core";
 
 function App() {
   const [ searchTerm, setSearchTerm ] = useState('');
@@ -22,7 +22,7 @@ function App() {
   // }, [searchTerm])
   return (
     <div className="App">
-      <h1>Travel Pal</h1>
+      <Typography variant='h1' component='h2' color='primary'>Travel Pal</Typography>
       <SearchTab searchTerm={searchTerm} onChange={onChange}/>
       <ResultsTab searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
     </div>
