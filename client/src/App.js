@@ -2,7 +2,7 @@ import { useState } from "react";
 import './App.css';
 import SearchTab from "./components/SearchTab";
 import ResultsTab from "./components/ResultsTab";
-import { Typography } from "@material-ui/core";
+import Navigation from "./components/Navigation";
 
 function App() {
   const [ searchTerm, setSearchTerm ] = useState('');
@@ -22,9 +22,11 @@ function App() {
   // }, [searchTerm])
   return (
     <div className="App">
-      <Typography variant='h1' component='h2' color='primary'>Travel Pal</Typography>
-      <SearchTab searchTerm={searchTerm} onChange={onChange}/>
-      <ResultsTab searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
+      <Navigation />
+      <main>
+        <SearchTab searchTerm={searchTerm} onChange={onChange}/>
+        <ResultsTab searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
+      </main>
     </div>
   );
 }
