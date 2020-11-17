@@ -1,32 +1,16 @@
-import { useState } from "react";
+import { Route } from "react-router-dom";
 import './App.css';
-import SearchTab from "./components/SearchTab";
-import ResultsTab from "./components/ResultsTab";
-import Navigation from "./components/Navigation";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import Home from "./components/Home";
 
 function App() {
-  const [ searchTerm, setSearchTerm ] = useState('');
-  const [ searchResults, setSearchResults ] = useState([]);
 
-  const onChange = e => {
-    setSearchTerm(e.target.value)
-  }
-  // useEffect(() => {
-  //   if(searchTerm) {
-  //     Axios.get(`http://localhost:5000/${searchTerm}`)
-  //     .then(({ data }) => {
-  //       setSearchResults(data)
-  //     })
-  //     .catch(err => console.log(err))
-  //   }
-  // }, [searchTerm])
   return (
     <div className="App">
-      <Navigation />
-      <main>
-        <SearchTab searchTerm={searchTerm} onChange={onChange}/>
-        <ResultsTab searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
-      </main>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/signup' component={SignUp} />
     </div>
   );
 }
