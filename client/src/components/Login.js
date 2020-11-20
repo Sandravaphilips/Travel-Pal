@@ -26,10 +26,13 @@ const Login = props => {
         axios.post('http://localhost:5000/login', formValues)
         .then(response => {
             console.log(response.data)
+            localStorage.setItem('id', response.data.user.id)
             setLoading(false)
+            props.history.push('/')
         })
         .catch(error => {
             alert(error);
+            setLoading(false)
         });
     }
     return(
