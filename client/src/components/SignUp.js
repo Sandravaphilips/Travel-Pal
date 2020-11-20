@@ -76,7 +76,7 @@ const SignUp = props => {
                         }
                     </Button>
 
-                    <p>Already have an account? <Link to='/'>Log In</Link></p> 
+                    <p>Already have an account? <Link to='/login'>Log In</Link></p> 
                 </form>
             </div>
         </Card>
