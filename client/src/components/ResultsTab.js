@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import Axios from "axios";
+//import { useEffect } from "react";
+//import Axios from "axios";
 import ResultTab from "./ResultTab";
 
 const ResultsTab = ({ searchTerm, setSearchResults, searchResults }) => {
-    useEffect(() => {
-        if(searchTerm) {
-            Axios.get(`http://localhost:5000/${searchTerm}`)
-            .then(({ data }) => {
-              setSearchResults(data)
-            })
-            .catch(err => console.log(err))
-          }      
-    }, [searchTerm, setSearchResults])
+    // useEffect(() => {
+    //     if(searchTerm) {
+    //         Axios.get(`http://localhost:5000/${searchTerm}`)
+    //         .then(({ data }) => {
+    //           setSearchResults(data)
+    //         })
+    //         .catch(err => console.log(err))
+    //       }      
+    // }, [searchTerm, setSearchResults])
 
     return(
         <div>
