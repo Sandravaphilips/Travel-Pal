@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const app = express();
 const port = process.env.PORT || 5000;
 const users = [];
+const usersHistory = [];
 
 dotenv.config()
 app.use(express.json());
@@ -24,8 +25,38 @@ app.get('/:country', (req, res) => {
     });
 
     request.end(function (response) {
-        if (response.error) throw new Error(response.error);
+        if (response.error) throw new Error({error: response.error});
         res.status(200).json(response.body)
+    });
+
+});
+
+app.get('/api/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const loggedInUser = users.find(user => user.id === id);
+        res.status(200).json(loggedInUser)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+});
+
+app.get('/:id/:country', (req, res) => {
+    const { country, id } = req.params;
+    const request = unirest("GET", `https://restcountries-v1.p.rapidapi.com/name/${country}`);
+
+    request.headers({
+        "x-rapidapi-key": process.env.RAPID_API_KEY,
+        "x-rapidapi-host": process.env.RAPID_API_HOST,
+        "useQueryString": true
+    });
+
+    request.end(function (response) {
+        if (response.error) throw new Error('No such country! Please enter a valid country.');
+        const loggedInUser = users.find(user => user.id == id)
+
+        if(loggedInUser) usersHistory.push({...req})
+        res.status(200).json(response.body)        
     });
 
 });
@@ -44,7 +75,7 @@ app.post('/register', (req, res) => {
     const newUser = {...req.body, id: id};
 
     if(username && password) {
-        users.push({...req.body, id: id})
+        users.push({...req.body, id: id, history: []})
         res.status(201).json({user: newUser, message: `Welcome to Travel Pal, ${username}`})
     } else res.status(400).json({message: 'Please fill in the required credentials.'})    
 });
