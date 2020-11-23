@@ -1,5 +1,3 @@
-//import { useEffect } from "react";
-//import Axios from "axios";
 import ResultTab from "./ResultTab";
 
 const ResultsTab = ({ searchTerm, searchResults, history }) => {
