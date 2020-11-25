@@ -10,20 +10,54 @@ import './App.css';
 const App = () => {
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ searchResults, setSearchResults ] = useState([]);
-  const [ history, setHistory ] = useLocalStorage('history', null);
+  const [ history, setHistory ] = useLocalStorage('history', []);
 
   const onChange = e => {
     setSearchTerm(e.target.value)
   };
 
+  const getItem = data => {
+    const funFacts = {
+      capital: data[0].capital,
+      name: data[0].name,
+      region: data[0].region,
+      demonym: data[0].demonym,
+      population: data[0].population,
+      languages: data[0].languages,
+      currencies: data[0].currencies
+    }
+    const replica = history.find(country => country.name === funFacts.name)
+    if(!replica) {
+      history.push(funFacts)
+      setHistory(history)
+    }
+  };
+
+  const setItem = data => {
+    const funFacts = {
+      capital: data[0].capital,
+      name: data[0].name,
+      region: data[0].region,
+      demonym: data[0].demonym,
+      population: data[0].population,
+      languages: data[0].languages,
+      currencies: data[0].currencies
+    }
+    
+    history.push(funFacts)
+    setHistory(history)
+  }
+
   const handleClick = e => {
     e.preventDefault()
-    setHistory([])
     if(searchTerm) {
       Axios.get(`http://localhost:5000/${searchTerm}`)
       .then(({ data }) => {
+        history.length > 0 ?
+          getItem(data) :
+          setItem(data)
+
         setSearchResults(data)
-        setHistory(history.push(searchTerm))
       })
       .catch(err => console.log(err))
     } 
