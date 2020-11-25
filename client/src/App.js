@@ -29,7 +29,10 @@ const App = () => {
     }
     const replica = history.find(country => country.name === funFacts.name)
     if(!replica) {
-      history.push(funFacts)
+      if(history.length >= 5) {
+        history.pop()
+      }
+      history.unshift(funFacts)
       setHistory(history)
     }
   };
