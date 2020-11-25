@@ -1,8 +1,22 @@
+import { CircularProgress, makeStyles } from "@material-ui/core";
 import ResultTab from "./ResultTab";
 
-const ResultsTab = ({ searchTerm, searchResults, history }) => {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      margin: theme.spacing(20, 80, 10)
+    },
+}));
+
+const ResultsTab = ({ searchTerm, searchResults, history, loading }) => {
+    const classes = useStyles();    
 
     const renderedComponent = () => {
+        if(loading) {
+            return <div className={classes.root}>
+                <CircularProgress />
+            </div>
+        }
         if(searchResults.length === 0 && history.length > 0) {
             return(
                 <div>
