@@ -10,6 +10,7 @@ import './App.css';
 const App = () => {
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ searchResults, setSearchResults ] = useState([]);
+  const [ loading, setLoading ] = useState(false);
   const [ history, setHistory ] = useLocalStorage('history', []);
 
   const onChange = e => {
@@ -50,6 +51,7 @@ const App = () => {
 
   const handleClick = e => {
     e.preventDefault()
+    setLoading(true)
     if(searchTerm) {
       Axios.get(`http://localhost:5000/${searchTerm}`)
       .then(({ data }) => {
@@ -58,8 +60,12 @@ const App = () => {
           setItem(data)
 
         setSearchResults(data)
+        setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+      })
     } 
   }
   
@@ -68,7 +74,7 @@ const App = () => {
       <Navigation />
       <main>
         <SearchTab searchTerm={searchTerm} onChange={onChange} onClick={handleClick}/>
-        <ResultsTab history={history} searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
+        <ResultsTab loading={loading} history={history} searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
       </main>
     </div>
   );
