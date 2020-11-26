@@ -23,7 +23,7 @@ app.get('/:country', (req, res) => {
     });
 
     request.end(function (response) {
-        if (response.error) throw new Error({error: response.error});
+        if (response.error) res.status(404).json(response.error);
         res.status(200).json(response.body)
     });
 
