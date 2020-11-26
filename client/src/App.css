@@ -32,8 +32,43 @@
   font-weight: bold;
 }
 
+.content {
+  margin: 20px 1rem;
+}
+
 .search {
-  display: inline-block;
+  width: 100%;
+  align-items: center;
+}
+
+.btn {
+  width: 150px;
+  margin-top: 15px !important;
+}
+
+.MuiInputBase-root {
+  width: 100%;
+}
+
+.country {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 700px) {
+  .MuiFormControl-root {
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .MuiInputBase-root {
+    width: 80%;
+  }
+
+  .btn {
+    margin-top: 0 !important;
+    width: 15%;
+  }
 }
 
 @keyframes App-logo-spin {
