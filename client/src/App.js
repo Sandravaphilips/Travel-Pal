@@ -56,7 +56,7 @@ const App = () => {
     e.preventDefault()
     setLoading(true)
     if(searchTerm) {
-      Axios.get(`http://localhost:5000/${searchTerm}`)
+      Axios.get(`https://travel-pal.herokuapp.com/${searchTerm}`)
       .then(({ data }) => {
         history.length > 0 ?
           getItem(data) :
@@ -75,7 +75,7 @@ const App = () => {
   return (
     <div className="App">
       <Navigation />
-      <main>
+      <main className='content'>
         <SearchTab searchTerm={searchTerm} onChange={onChange} onClick={handleClick}/>
         <ResultsTab loading={loading} history={history} searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
       </main>
