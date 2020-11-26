@@ -7,7 +7,7 @@ const ResultTab = (props) => {
     const currencyNames = new Intl.DisplayNames(['en'], {type: 'currency'});
 
     return(
-        <Card>
+        <Card className='country'>
             <CardContent>
                 <Typography color='primary' variant="h4" component="h2">{name}</Typography>
                 <Typography><span className='fields'>Capital:</span> {capital}<br/>
