@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ResultsTab = ({ searchTerm, searchResults, history, loading }) => {
+const ResultsTab = ({ searchTerm, searchResults, history, loading, error }) => {
     const classes = useStyles();    
 
     const renderedComponent = () => {
@@ -16,8 +16,13 @@ const ResultsTab = ({ searchTerm, searchResults, history, loading }) => {
             return <div className={classes.root}>
                 <CircularProgress />
             </div>
-        }
-        if(searchResults.length === 0 && history.length > 0) {
+        } else if(error) {
+            return(
+                <div>
+                    <h3>Oops! Country not found. Kindly check that your country is spelled correctly or try another country</h3>
+                </div>
+            )
+        }else if(searchResults.length === 0 && history.length > 0) {
             return(
                 <div>
                     <h2>
