@@ -11,6 +11,7 @@ const App = () => {
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ searchResults, setSearchResults ] = useState([]);
   const [ loading, setLoading ] = useState(false);
+  const [ error, setError ] = useState(false);
   const [ history, setHistory ] = useLocalStorage('history', []);
 
   const onChange = e => {
@@ -54,6 +55,7 @@ const App = () => {
 
   const handleClick = e => {
     e.preventDefault()
+    setError(false)
     setLoading(true)
     if(searchTerm) {
       Axios.get(`https://travel-pal.herokuapp.com/${searchTerm}`)
@@ -66,8 +68,9 @@ const App = () => {
         setLoading(false)
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
         setLoading(false)
+        setError(true)
       })
     } 
   }
@@ -77,7 +80,7 @@ const App = () => {
       <Navigation />
       <main className='content'>
         <SearchTab searchTerm={searchTerm} onChange={onChange} onClick={handleClick}/>
-        <ResultsTab loading={loading} history={history} searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
+        <ResultsTab error={error} loading={loading} history={history} searchResults={searchResults} setSearchResults={setSearchResults} searchTerm={searchTerm}/>
       </main>
     </div>
   );
